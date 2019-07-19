@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import { helloWorld } from '../actions/test'
 import {addalbum} from '../actions/addalbum'
 import {setAlbums} from '../actions/albums'
+import {getAlbums} from '../actions/albums'
 
 
 
@@ -28,7 +29,7 @@ class AlbumsListContainer extends React.Component {
 //   }
     componentDidMount() {
         request('https://jsonplaceholder.typicode.com/albums')
-        .then(res => this.props.setAlbums({albums: res.body}))
+        .then(res => this.props.getAlbums())
   }
 
   render() {
@@ -43,4 +44,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setAlbums})(AlbumsListContainer)
+export default connect(mapStateToProps, {setAlbums},{getAlbums})(AlbumsListContainer)
