@@ -6,6 +6,7 @@ import { helloWorld } from '../actions/test'
 import {addalbum} from '../actions/addalbum'
 import {setAlbums} from '../actions/albums'
 import {getAlbums} from '../actions/albums'
+import { bindActionCreators } from 'redux';
 
 
 
@@ -43,5 +44,6 @@ const mapStateToProps = (state) => {
       albums: state.albums
     }
 }
+const mapDispatchToProps = dispatch => bindActionCreators({ setAlbums, getAlbums, addalbum }, dispatch);
 
-export default connect(mapStateToProps, {setAlbums},{getAlbums})(AlbumsListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumsListContainer)

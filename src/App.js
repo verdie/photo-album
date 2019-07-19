@@ -5,6 +5,7 @@ import {Provider} from 'react-redux'
 import store from './store'
 import AlbumsListContainer from './components/AlbumsListContainer';
 import { Route } from 'react-router-dom'
+import AlbumsDetailsCotainer from './components/AlbumsDetailsCotainer';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <main>
       <Provider store={store}>
         <Route exact path="/" component={AlbumsListContainer} />
+        <Route exact path="/albums/:id" component={AlbumsDetailsCotainer} />
         </Provider>
       </main>
     </div>
