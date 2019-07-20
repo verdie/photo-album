@@ -1,4 +1,4 @@
-import { request } from "http";
+import * as request from "superagent";
 
 export const SET_PHOTOS ='SET_PHOTOS'
 
@@ -12,11 +12,10 @@ export function setPhotos(photos) {
 
 export function getPhotosByAlbum(albumId) {
     return function (dispatch) {
-        request('https://jsonplaceholder.typicode.com/photos?albumId=:id')
-      // fetch the photos from https://jsonplaceholder.typicode.com/photos?albumId=:albumId
-      // dispatch an action that is created using setPhotos
-      .then(response => {
-        dispatch(setPhotos(response.body))
-      })
+        request(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+          .then(res => {
+            console.log('my res:', res.body)
+            dispatch(setPhotos(res.body))
+          })
     }
   }

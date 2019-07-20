@@ -1,13 +1,25 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PhotoPage from './PhotoPage';
-import getPhotosByAlbum from '../actions/photos.js'
+import {getPhotosByAlbum} from '../actions/photos.js'
+import request from 'superagent'
 
 class PhotoPageContainer extends Component{    
+    componentDidMount() {
+       // request(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+        
+        // .then(res => {console.log(res.body)
+        //     return this.props.getPhotosByAlbum()
+        // })
+        return this.props.getPhotosByAlbum(this.props.match.params.id)
+  }
     render (){
-        console.log('HAHA:', this.props.getPhotosByAlbum())
+        console.log('this.props.photos test:', this.props.photos)
+        
         const albumId = this.props.match.params.id;
         const album= this.props.albums.find((album)=> album.id===parseInt(albumId))
+
+        console.log('this.props.photos test:',(this.props.photos))
 
         return <PhotoPage {...album} photos={this.props.photos} />
     }
@@ -19,5 +31,5 @@ const mapStateToProps = (state) => {
         photos: state.photos
     }
 }
-
-export default connect(mapStateToProps)(PhotoPageContainer)
+//const mapDispatchToProps = dispatch =>  getPhotosByAlbum();
+export default connect(mapStateToProps,{getPhotosByAlbum})(PhotoPageContainer)
